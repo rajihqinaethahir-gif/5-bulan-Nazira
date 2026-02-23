@@ -3,139 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5 Bulan Kita 💙</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>5 Bulan Kita 🌙</title>
+
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#020b1a,#0b2a4a,#87CEEB);color:white;overflow-x:hidden}
-section{padding:60px 20px;text-align:center;max-width:900px;margin:auto}
-h1{font-size:2.2rem;margin-bottom:10px}
-p{line-height:1.8}
-.card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:18px;padding:30px;box-shadow:0 10px 25px rgba(0,0,0,0.3)}
-.counter{font-size:1.4rem;font-weight:600;margin-top:10px}
-button{padding:10px 18px;border:none;border-radius:12px;background:#87CEEB;color:#002244;font-weight:600;cursor:pointer;margin:5px}
-button:hover{transform:scale(1.05)}
-.map iframe{width:100%;height:350px;border-radius:15px;border:none}
-footer{padding:40px;font-size:0.9rem;opacity:0.7}
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    color:white;
+    text-align:center;
+    background: radial-gradient(circle at top,#0b1d3a,#000814);
+    overflow-x:hidden;
+}
 
-/* opening */
-#opening{position:fixed;inset:0;background:#020b1a;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999}
-#opening h1{font-size:2rem;animation:fade 2s ease forwards}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+/* Bulan */
+.moon{
+    position:fixed;
+    top:60px;
+    right:80px;
+    width:140px;
+    height:140px;
+    background:radial-gradient(circle,#fff,#ddd,#bbb);
+    border-radius:50%;
+    box-shadow:0 0 60px white;
+}
 
-/* falling stars & hearts */
-.star,.heart{position:fixed;top:-10px;pointer-events:none;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+/* bintang */
+.star{
+    position:fixed;
+    width:3px;
+    height:3px;
+    background:white;
+    animation:blink 2s infinite alternate;
+}
+@keyframes blink{
+    from{opacity:0.2}
+    to{opacity:1}
+}
 
-/* moon */
-.moon{position:fixed;top:40px;right:40px;width:120px;height:120px;background:radial-gradient(circle,#fff,#ddd);border-radius:50%;box-shadow:0 0 40px rgba(255,255,255,0.7)}
+.container{
+    margin:60px auto;
+    max-width:800px;
+    background:rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:20px;
+}
 
-.quiz button{display:block;margin:8px auto;width:70%}
-
-@media(max-width:600px){h1{font-size:1.6rem}}
+/* tombol */
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ffd166;
+    cursor:pointer;
+    margin:5px;
+    font-weight:bold;
+}
+button:hover{background:#ffb703}
 </style>
 </head>
-<body>
 
-<div id="opening">
-<h1>Untuk Nazira Nur Aisya 💙</h1>
-<button onclick="startSite()">Masuk ✨</button>
-</div>
+<body>
 
 <div class="moon"></div>
 
-<section>
-<div class="card">
+<script>
+/* generate bintang */
+for(let i=0;i<60;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.top=Math.random()*100+"vh";
+ s.style.left=Math.random()*100+"vw";
+ document.body.appendChild(s);
+}
+</script>
+
+<div class="container">
 <h1>5 Bulan Kita 🌙</h1>
-<p id="typed"></p>
+<p>raaa, akuu bersyukur banget di bulan ke 5 ini kitaa masih bisa bersama... love you 💙</p>
 </div>
-</section>
 
-<section>
-<div class="card">
-<h2>Countdown Ketemu Lagi</h2>
-<div class="counter" id="countdown"></div>
+<div class="container">
+<h2>Countdown Special</h2>
+<p id="countdown"></p>
 </div>
-</section>
-
-<section>
-<div class="card map">
-<h2>Perjalanan Kita</h2>
-<iframe src="https://www.google.com/maps?q=Tangerang+to+Rangkasbitung&output=embed"></iframe>
-</div>
-</section>
-
-<section>
-<div class="card">
-<h2>🎵 Lagu Kita</h2>
-<button onclick="playSong('lagu1')">▶ Amin Paling Serius</button>
-<button onclick="playSong('lagu2')">▶ Masa Ini, Nanti, dan Masa Indah Lainnya</button>
-<audio id="lagu1" src="amin-paling-serius.mp3"></audio>
-<audio id="lagu2" src="masa-ini-nanti.mp3"></audio>
-</div>
-</section>
-
-<section>
-<div class="card">
-<h2>Quiz Tentang Qinae 💙</h2>
-<div class="quiz" id="quiz"></div>
-</div>
-</section>
-
-<section>
-<div class="card">
-<h2>Mini Game 🎮</h2>
-<p>Klik hati sebanyak mungkin dalam 10 detik!</p>
-<button onclick="startGame()">Mulai Game</button>
-<p>Skor: <span id="score">0</span></p>
-</div>
-</section>
-
-<footer>
-Made with love by Rajih Qinae Thahir 💙
-</footer>
 
 <script>
-function startSite(){document.getElementById('opening').style.display='none'}
+let target=new Date();
+target.setDate(target.getDate()+7);
 
-/* typing message */
-const text=`raaa, akuu bersyukur banget di bulan ke 5 ini kitaa masih bisa bersama... love you all my love 💙`;
-let i=0;function typing(){if(i<text.length){document.getElementById('typed').innerHTML+=text.charAt(i);i++;setTimeout(typing,30)}}typing();
-
-/* countdown 7 hari */
-let days=7;document.getElementById('countdown').innerText=days+" hari lagi 💫";
-
-/* falling animation */
 setInterval(()=>{
-let s=document.createElement('div');s.className='star';s.innerHTML='⭐';s.style.left=Math.random()*100+'vw';s.style.animationDuration=(3+Math.random()*5)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),8000);
-let h=document.createElement('div');h.className='heart';h.innerHTML='💙';h.style.left=Math.random()*100+'vw';h.style.animationDuration=(4+Math.random()*5)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),8000);
-},800);
+ let now=new Date();
+ let diff=target-now;
 
-/* music */
-function playSong(id){document.querySelectorAll('audio').forEach(a=>{a.pause();a.currentTime=0});document.getElementById(id).play();}
+ let d=Math.floor(diff/(1000*60*60*24));
+ let h=Math.floor((diff/(1000*60*60))%24);
+ let m=Math.floor((diff/(1000*60))%60);
+ let s=Math.floor((diff/1000)%60);
 
-/* quiz */
-const questions=[
-{q:'Siapa nama adik kesayang Qinae?',o:['Keima','Ayesha'],a:'Ayesha'},
-{q:'Makanan kesukaan Qinae?',o:['Mie ayam','Es krim','Martabak','Kue cubit'],a:'Martabak'},
-{q:'Warna kesukaan Qinae?',o:['Biru','Merah','Monokrom'],a:'Monokrom'},
-{q:'Impian aku?',o:['Nikah sama kamu','Kamu nikah sama aku','Opsi A','Benar semua'],a:'Benar semua'}
-];
-let quizDiv=document.getElementById('quiz');
-questions.forEach((item)=>{
-let box=document.createElement('div');
-box.innerHTML='<p>'+item.q+'</p>';
-item.o.forEach(opt=>{
-let btn=document.createElement('button');btn.innerText=opt;
-btn.onclick=()=>alert(opt===item.a?'Benar 💙':'Salah 😆');
-box.appendChild(btn);
-});quizDiv.appendChild(box);
-});
-
-/* mini game */
-let score=0,playing=false;
-function startGame(){score=0;playing=true;document.getElementById('score').innerText=0;setTimeout(()=>playing=false,10000)}
-document.addEventListener('click',e=>{if(playing && e.target.classList.contains('heart')){score++;document.getElementById('score').innerText=score}});
+ document.getElementById("countdown").innerHTML=
+ d+" hari "+h+" jam "+m+" menit "+s+" detik";
+},1000);
 </script>
-<h1>TEST AKHIR FILE</h1>
+
+<div class="container">
+<h2>Music Player 🎵</h2>
+
+<audio id="laguUtama" autoplay loop>
+<source src="amin.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="playSong('amin.mp3')">Amin Paling Serius</button>
+<button onclick="playSong('masa-ini.mp3')">Masa Ini</button>
+<button onclick="playSong('masa-indah.mp3')">Masa Indah</button>
+</div>
+
+<script>
+function playSong(src){
+ let audio=document.getElementById("laguUtama");
+ audio.src=src;
+ audio.play();
+}
+</script>
+
+<div class="container">
+<h2>Quiz Tentang Qinae 💫</h2>
+
+<p>1. siapa nama adik kesayang Qinae?</p>
+<button onclick="jawab(this,'Ayesha')">Keima</button>
+<button onclick="jawab(this,'Ayesha',true)">Ayesha</button>
+
+<p>2. makanan kesukaan qinae?</p>
+<button onclick="jawab(this,'Martabak')">Mie Ayam</button>
+<button onclick="jawab(this,'Martabak')">Es Krim</button>
+<button onclick="jawab(this,'Martabak',true)">Martabak</button>
+<button onclick="jawab(this,'Martabak')">Kue Cubit</button>
+
+<p>3. warna kesukaan qinae?</p>
+<button onclick="jawab(this,'Monokrom')">Biru</button>
+<button onclick="jawab(this,'Monokrom')">Merah</button>
+<button onclick="jawab(this,'Monokrom',true)">Monokrom</button>
+
+<p>4. impian aku?</p>
+<button onclick="jawab(this,'Benar semua')">Nikah sama kamu</button>
+<button onclick="jawab(this,'Benar semua')">Kamu nikah sama aku</button>
+<button onclick="jawab(this,'Benar semua',true)">Benar semua</button>
+
+<p id="hasilQuiz"></p>
+</div>
+
+<script>
+function jawab(btn,ans,benar=false){
+ document.getElementById("hasilQuiz").innerHTML=
+ benar ? "✅ Jawaban benar!" : "❌ Hampir benar 😄";
+}
+</script>
+
+<div class="container">
+<h2>Mini Game ⭐</h2>
+<p>Klik bintang sebanyak mungkin!</p>
+<h3>Score: <span id="score">0</span></h3>
+<button onclick="tambah()">Tangkap Bintang</button>
+</div>
+
+<script>
+let score=0;
+function tambah(){
+ score++;
+ document.getElementById("score").innerText=score;
+}
+</script>
+
 </body>
 </html>
