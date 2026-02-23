@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Bulan Kita 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#87CEEB,#eaf7ff);
+  color:#0f2a44;
+  overflow-x:hidden;
+}
+section{padding:60px 20px;text-align:center;max-width:900px;margin:auto}
+h1{font-size:2.2rem;margin-bottom:10px}
+p{line-height:1.8}
+.card{
+  background:white;
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+.counter{font-size:1.4rem;font-weight:600;margin-top:10px}
+.map iframe{width:100%;height:350px;border-radius:15px;border:none}
+footer{padding:40px;font-size:0.9rem;opacity:0.7}
+
+/* falling hearts & stars */
+.heart,.star{
+  position:fixed;
+  top:-10px;
+  pointer-events:none;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+button{
+  background:#87CEEB;
+  border:none;
+  padding:12px 20px;
+  border-radius:999px;
+  font-size:1rem;
+  cursor:pointer;
+  color:white;
+  margin-top:20px;
+}
+
+.hidden{display:none}
+
+@media(max-width:600px){
+  h1{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgmusic" autoplay loop muted>
+  <source src="masa-ini-nanti.mp3" type="audio/mpeg">
+</audio>
+
+<section>
+<h1>💙 5 Bulan Perjalanan Kita 💙</h1>
+<p>Rajih Qinae Thahir & Nazira Nur Aisya</p>
+<div class="counter" id="counter"></div>
+<p style="opacity:0.7;font-size:0.9rem">(musik otomatis diputar)</p>
+</section>
+
+<section>
+<div class="card">
+<h1>Pesan Untuk Kamu</h1>
+<p>
+raaa, akuu bersyukur banget di bulan ke 5 ini kitaa masih bisa bersama. aku harap kedepannya kita akan selalu bersama apapun kondisinya. makasih ya udah mau nerima aku apa adanya. makasih selama ini udah mau ngertiin aku. akuu mintaa maaf atas kesalahanku selama ini. aku bakal perbaikin semua ituu pelan pelan demi kamuu. akuu tauu ldr emang berat, apalagi sekarang kita beda negara. semoga nanti di masa depan kita ga usah lagi pisah kota, apalagi pisah negara, semoga di masa depan nanti kita bisa satu rumah, aamiinnn. raaa, mungkin akuu belum sempurna dibandingkan dengan cowo lain diluar sana, tapi terima kasih karna sudah memilihku sebagai teman berbagi cerita dan keluh kesah kamu. akuu seneng direpotin amaa kamuu, meskipun kadang akuu menyebalkan, tapi akuuu sayangg kamuu raaaa, sayanggggg bangetttt. kamuu yang bikin akuu berubah jadi seperti iniii, cumaa samaa kamuu akuu bisa ngerasain kembali menjadi anak kecil, cuma sama kamuu akuu merasa disayanggg bangettt, diperhatiinn, dimanjain, diomelin, dipeduliin. akuu suka semua perlakuan kamuu ke akuu raaa. raaaaa, jangan tanggung semua beban kamuu sendirian yaaa, adaa akuu yangg akann selalu adaa buat kamuu. akuu emangg gaa bisa ngasih segalanyaa buat kamuu. tapii akuu akan usahakan yang terbaik buat kamuu. jangan stress muluu raaa, dijaga kesehatannyaaa, di jaga jugaa sikapnyaaaa, baik baik ke semua orang, biar orang lain jugaa baik samaa kamuuu. perbanyak ibadah, jangan malah kebanyakan tidur, wkwkwkwk. akuu sayanggg bangettt samaa kamuuu raaaa, cepet cepet pulanggg yaaa putri kesayangankuuu, hehe. loveeeeee youuuuu alllllll myyyy loveeeee 💙
+</p>
+</div>
+</section>
+
+<section class="map">
+<h1>Perjalanan Kita</h1>
+<p>Tangerang ➝ Rangkasbitung</p>
+<iframe src="https://www.google.com/maps?q=Tangerang+to+Rangkasbitung&output=embed"></iframe>
+</section>
+
+<section>
+<div class="card">
+<h1>Lagu Favorit Kamu</h1>
+<p>Amin Paling Serius — Sal Priadi & Nadin Amizah</p>
+</div>
+</section>
+
+<footer>
+Dibuat khusus oleh Rajih untuk Nazira 💙
+</footer>
+
+<script>
+// counter sejak jadian
+const startDate = new Date("2025-09-25");
+function updateCounter(){
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff/(1000*60*60*24));
+  document.getElementById("counter").innerText = "Kita sudah bersama selama " + days + " hari";
+}
+updateCounter();
+
+// mencoba autoplay lalu unmute otomatis
+window.addEventListener("load",()=>{
+  const music=document.getElementById("bgmusic");
+  music.play().catch(()=>{});
+  setTimeout(()=>{
+    music.muted=false;
+  },1500);
+});
+
+// hearts & stars animation
+function createElement(type){
+  const el=document.createElement("div");
+  el.className=type;
+  el.innerText= type==="heart"?"💙":"⭐";
+  el.style.left=Math.random()*100+"vw";
+  el.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),8000);
+}
+setInterval(()=>createElement("heart"),700);
+setInterval(()=>createElement("star"),900);
+</script>
+
+</body>
+</html>
